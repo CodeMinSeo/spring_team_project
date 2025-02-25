@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bitc.fullstack503.team1.mapper.member.MemberMapper">
+
+<!--    회원 가입 정보 등록하기-->
+    <insert id="memberReg" parameterType="bitc.fullstack503.team1.dto.member.RegisterDTO">
+        INSERT INTO user (user_id, user_pw, user_name, user_email, user_phone,create_date)
+        VALUES (#{userId},#{userPw1},#{userName},#{userEmail},#{userPhone},now())
+    </insert>
+
+<!--    id 중복 확인-->
+    <select id="checkId" parameterType="map" resultType="int">
+        SELECT count(*)
+        FROM user
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="isUserInfo" parameterType="map" resultType="int">
+        SELECT count(*) AS cnt
+        FROM user
+        WHERE user_id = #{userId}
+        AND user_pw = #{userPw1}
+<!--        AND deleted_yn='N'-->
+    </select>
+
+
+    <select id="getUserInfo" resultType="bitc.fullstack503.team1.dto.member.RegisterDTO" parameterType="String">
+        SELECT user_id, user_name, user_email, user_phone,create_date, update_date
+        FROM user
+        WHERE user_id = #{userId}
+    </select>
+
+</mapper>

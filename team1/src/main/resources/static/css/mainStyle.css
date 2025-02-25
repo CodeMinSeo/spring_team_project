@@ -1,0 +1,492 @@
+/* Global */
+:root {
+    /* App Colors */
+    --color-primary: var(--coloer-point);
+    --color-primary-variant: var(--color-white-variant);
+    --color-accent: var(--color-blue);
+    --color-accent-variant: var(--color-yellow);
+    --color-text: var(--color-black);
+    --color-footer-bg: var(--color-gray);
+
+    /* Colors */
+    --coloer-point: #601986;
+    --color-white: #ffffff;
+    --color-white-variant: #c3c6c8;
+    --color-black: #000000;
+    --color-blue: #00b9f6;
+    --color-yellow: #dcdf00;
+    --color-gray: #252a2c;
+
+    /* Size */
+    --size-max-width: 1440px;
+
+    /* img 태두리 제거 */
+    --bs-border-color-translucent: none;
+
+    /* Divider */
+    --divider-single-wave: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" > <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" ></path> </svg>');
+    --divider-multi-wave: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" > <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" ></path> <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" ></path> <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" ></path> </svg>');
+    --divider-arrow: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" > <path d="M649.97 0L550.03 0 599.91 54.12 649.97 0z" ></path> </svg>');
+}
+
+/* 크롬에서 검색인풋 x버튼 제거 */
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration {
+    display: none;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans KR", serif;
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Common */
+.max-container {
+    max-width: var(--size-max-width);
+    margin: auto;
+}
+
+
+.review-blur {
+    z-index: 999999;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: rgb(255, 98, 7);
+
+    filter: blur(5px) !important;
+    -webkit-filter: blur(5px);
+
+}
+/* MainBanner */
+#mainBanner {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(/img/mainBanner01.jpg);
+    background-size: cover;
+    background-position: center center;
+    height: 95vh;
+    /*height: 95vh; 밑에 텍스트 안보이도록 메인배너 넓히는게 좋을것 같습니다 : hyun*/
+    padding-top: 75px;
+    margin-bottom: 100px;
+    color: var(--color-primary);
+}
+
+#mainBanner::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: calc(100% + 1.3px);
+    height: 60px;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+    background-color: var(--color-white);
+    mask: var(--divider-single-wave);
+    -webkit-mask: var(--divider-single-wave);
+    /* https://www.shapedivider.app/ */
+}
+
+.category {
+    text-align: center;
+    width: 100%;
+    background: transparent;
+    border: none;
+}
+
+.category:hover {
+    filter: brightness(50%);
+}
+
+.category--selected {
+    color: blue;
+    border-bottom: 2px solid blue;
+    padding-bottom: 5px;
+}
+
+.mainBannerSearch {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainBannerSearch {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainBanner__search {
+    align-items: center;
+    padding: 0.2rem;
+    overflow: hidden;
+    width: 650px;
+    height: auto;
+    padding: 0rem;
+    background: white;
+    border: none;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.mainBanner__search__input {
+    padding-left: 5px;
+    width: 80%;
+    color: black;
+    background: transparent;
+    font-size: 18px;
+    border: 0;
+    outline: 0;
+}
+
+input::placeholder {
+    color: gray;
+    font-size: 18px;
+}
+
+.mainBanner__search__button {
+    /*height: 68px;*/
+    /*padding: 0 20px;*/
+    border: 0 none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.mainBanner__icon {
+    transition: all 300ms ease-in-out;
+}
+
+.mainBanner__search__button:hover .mainBanner__icon {
+    color: #601986;
+    transform: scale(1.1);
+}
+
+.mainBanner__icon {
+    font-size: 18px;
+}
+
+.mainBanner__search__icon:hover {
+    transform: scale(1.1);
+}
+
+.mainBanner__cate {
+    position: absolute;
+    top: -40px;
+    left: 30px;
+}
+
+.mainBanner__cate__btn {
+    background-color: transparent;
+    width: 60px;
+    height: 30px;
+    border: 1.4px solid white;
+    border-radius: 10px;
+    color: white;
+}
+
+.mainBanner__cate__btn:nth-child(1):hover {
+    color: red;
+    border-color: red;
+    transition: all 300ms ease;
+    cursor: pointer;
+}
+.mainBanner__cate__btn:nth-child(2):hover {
+    color: royalblue;
+    border-color: royalblue;
+    transition: all 300ms ease;
+    cursor: pointer;
+}
+
+/* hotSpot */
+#hotSpot {
+}
+
+.hotSpot__container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 10px;
+}
+
+.hotSpot__image {
+    width: 480px;
+    height: 480px;
+}
+
+.hotSpot__image_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px 0px rgb(0,0,0,0.1);
+}
+
+.hotSop__title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.hotSop__title__icon {
+    margin-right: 10px;
+    color: #ffb900;
+}
+
+
+
+.hotSpot__des__title {
+    position: relative;
+    font-size: 32px;
+    font-weight: normal;
+    padding-bottom: 23px;
+}
+
+.hotSpot__des {
+    width: 635px;
+    height: 560px;
+    padding-top: 30px;
+}
+
+.hotSpot__des__container {
+    margin-top: 5px;
+    font-size: 20px;
+    color: #666666;
+}
+
+.hotSpot_info li{
+    display: flex;
+    padding-bottom: 30px;
+}
+
+.hotSpot__des__key {
+    width: 180px;
+    font-weight: 600;
+    color: #444444;
+}
+
+.hotSpot__des__value {
+    color: #666666;
+    font-size: 19px;
+}
+.hotSpot_span {
+    display: block;
+    padding-bottom: 20px;
+
+
+}
+
+/* hotPlace */
+.slider-container {
+    position: relative;
+    width: 73%;
+    margin: auto;
+    overflow: hidden;
+    margin-bottom: 104px;
+}
+.slider {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    width: 80%;
+    height: 348px;
+}
+.card {
+    position: relative;
+    min-width: 35%;
+    height: 250px;
+    margin: 0 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    object-fit: cover;
+    box-shadow: 4.0px 8.0px 8.0px rgba(0,0,0,0.1);
+}
+.card:hover .card__img {
+    transform: scale(1.05); /* 이미지 확대 */
+}
+.card__img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 300ms ease-in-out;
+}
+
+.hotPlace__rank {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    padding: 10px;
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.hotPlace__rank {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 4px 20px;
+    color: #ffffff;
+    background-color: #188FFF;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 500;
+    z-index: 2;
+}
+#hotPlace {
+    position: relative;
+}
+.hotPlace__btn {
+    position: absolute;
+    top: 32%;
+    transform: translateY(-32%);
+    color: #bbbbbb;
+    border: none;
+    background-color: transparent;
+    padding: 100px 20px;
+    z-index: 10;
+    cursor: pointer;
+    font-size: 3rem;
+}
+
+.hotPlace__btn:hover {
+    filter: brightness(50%);
+    transition: all 300ms ease;
+}
+.prev {
+    left: 10%;
+}
+.next {
+    right: 10%;
+}
+
+/* Footer */
+#contact {
+    background-color: #252a2c;
+    color: white;
+    height: 300px;
+    line-height: 300px;
+    text-align: center;
+    font-size: 5rem;
+}
+.select {
+}
+.select input[type=radio]{
+    display: none;
+}
+.select__label {
+    margin-right: 15px;
+}
+.select input[type=radio]+label{
+    display: inline-block;
+    cursor: pointer;
+    height: 30px;
+    width: 75px;
+    border: 1px solid #333;
+    line-height: 24px;
+    text-align: center;
+    font-size: 16px;
+}
+.select input[type=radio]+label{
+    background-color: transparent;
+    border: none;
+    color: black;
+}
+.select input[type=radio]:checked+label{
+    border-bottom: 2px solid #188FFF;
+    color: #188FFF;
+    font-weight: bold;
+
+}
+
+/* Header.html */
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 75px;
+    line-height: 75px;
+    padding: 0 1rem;
+    z-index: 99999999999999;
+}
+.header-inner {
+    width: 1440px;
+    margin: 0 auto;
+}
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center
+}
+a {
+    text-decoration: none;
+    color: #000000;
+}
+.menu_bg {
+    width: 50%;
+    height: 2000px;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    overflow: hidden;
+    display: none;
+}
+
+.menu {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 46%;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: -15px 0px 10px -2px rgba(0, 0, 0, 0.1);
+}
+.menu > div {
+    padding: 7%;
+}
+
+.dropdown-item {
+    font-size: 30px;
+    font-weight: bold;
+}
+.menu-active {
+    color: #0099ff;
+}
+.header-color-change {
+    color: #ffffff;
+}
+.filled-star {
+    color: gold; /* 채워진 별은 금색 */
+}
+
+.empty-star {
+    color: lightgray; /* 비어있는 별은 연한 회색 */
+}

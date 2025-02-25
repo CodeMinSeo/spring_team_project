@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>검색리스트</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=IBM+Plex+Sans+KR&family=Noto+Sans+KR:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+    />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="/css/Header.css">
+    <link rel="stylesheet" href="/css/SearchList.css">
+    <script th:src="@{/js/mainPage.js}"></script>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+            integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    />
+</head>
+<body>
+    <div th:replace="~{/layout/Header :: header}"></div>
+    <main class="container">
+        <div class="d-flex" style="gap: 160px;">
+            <aside>
+                <div class="pb-3 pt-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="m-0" style="font-size: 1.125rem; font-weight: 700">카테고리</h2>
+<!--                        <a href="#" class="text-decoration-none d-flex" style="color: rgb(214, 214, 214)">-->
+<!--                            <span class="me-1">-->
+<!--                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="vertical-align: 0; fill: rgb(214, 214, 214)">-->
+<!--                                    <path d="M142.9 142.9c-17.5 17.5-30.1 38-37.8 59.8c-5.9 16.7-24.2 25.4-40.8 19.5s-25.4-24.2-19.5-40.8C55.6 150.7 73.2 122 97.6 97.6c87.2-87.2 228.3-87.5 315.8-1L455 55c6.9-6.9 17.2-8.9 26.2-5.2s14.8 12.5 14.8 22.2l0 128c0 13.3-10.7 24-24 24l-8.4 0c0 0 0 0 0 0L344 224c-9.7 0-18.5-5.8-22.2-14.8s-1.7-19.3 5.2-26.2l41.1-41.1c-62.6-61.5-163.1-61.2-225.3 1zM16 312c0-13.3 10.7-24 24-24l7.6 0 .7 0L168 288c9.7 0 18.5 5.8 22.2 14.8s1.7 19.3-5.2 26.2l-41.1 41.1c62.6 61.5 163.1 61.2 225.3-1c17.5-17.5 30.1-38 37.8-59.8c5.9-16.7 24.2-25.4 40.8-19.5s25.4 24.2 19.5 40.8c-10.8 30.6-28.4 59.3-52.9 83.8c-87.2 87.2-228.3 87.5-315.8 1L57 457c-6.9 6.9-17.2 8.9-26.2 5.2S16 449.7 16 440l0-119.6 0-.7 0-7.6z"/>-->
+<!--                                </svg>-->
+<!--                            </span>-->
+<!--                            <span style="font-size: 0.875rem">초기화</span>-->
+<!--                        </a>-->
+                    </div>
+                </div>
+<!--                <div class="d-flex flex-column align-items-start">-->
+<!--                    <div class="d-inline-flex align-items-center pb-3 pt-3">-->
+<!--                        <button id="spotBtn" class="circle-button"></button>-->
+<!--                        <span>관광명소만 보기</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="d-flex flex-column align-items-start border-top">
+                    <div class="pb-2 pt-2 w-100">
+                        <div class="pb-3 pt-3 mb-1">
+                            <h3 style="font-size: 1rem; font-weight: 700" class="align-items-center d-flex">위치</h3>
+                        </div>
+                        <div class="d-flex flex-column pb-3">
+                            <div class="d-inline-flex align-items-center pb-3 pt-3">
+                                <button id="all-lists-btn" class="circle-button"></button>
+                                <span>전체</span>
+                            </div>
+                            <div th:each="gugun : ${gugunList}" class="d-inline-flex align-items-center pb-3 pt-3">
+                                <button class="circle-button gugun-filter" th:data-gugun="${gugun.GUGUNNM}"></button>
+                                <span th:text="${gugun.GUGUNNM}">구군</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+            <section class="flex-grow-1">
+                <!-- 상품 목록 -->
+                <div id="content-area" class="mb-5">
+                    <div class="searchlist">
+                        <h1>
+                            <span class="border-bottom pb-1" th:text="${category.equals('A') ? '관광명소' : '맛집'}" style="color: #188FFF"></span>
+                            <span class="ps-4 pe-4" th:text="|&apos;${#strings.isEmpty(Keyword) ? '전체' : Keyword}&apos;|">123</span>
+                            <span th:text="|검색결과 ${countResult}개|"></span>
+                        </h1>
+                    </div>
+                    <div id="category-data" th:data-category="${category}"></div>
+                    <div id="keyword-data" th:data-keyword="${Keyword}"></div>
+                    <div class="row pb-3 border-bottom pt-3" th:if="${#lists.size(SearchList.getList())} > 0 " th:each="item : ${SearchList.getList()}">
+                        <div class="col-sm-6" style="border-color: rgb(235,235,235); background-color: rgb(255,255,255)">
+                            <div class="position-relative" style="height: 240px; width: 100%;">
+                                <div class="overflow-hidden h-100">
+                                    <a href="#" th:href="@{|/SearchDetail/${item.UCSEQ}?category=${category}|}">
+                                        <img sizes="100vw" src="#" class="position-absolute h-100 w-100" style="inset: 0px; color: transparent; object-fit: cover; max-height: 240px; border-radius: 12px;" alt="#" th:src="@{|${item.MAINIMGTHUMB}|}" th:if="${item.MAINIMGTHUMB} != null">
+                                        <img sizes="100vw" src="#" th:unless="${item.MAINIMGTHUMB} != null" class="position-absolute h-100 w-100 border" style="inset: 0px; color: transparent; object-fit: cover; max-height: 240px; border-radius: 12px;" th:src="@{/img/noimage.jpg}">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <p class="mb-0" style="color: rgb(112 112 112)" th:text="${item.GUGUNNM}">구군</p>
+                            <h2 class="mt-1" style="font-size: 1.1em; font-weight: 700" th:text="${item.MAINTITLE}">명소이름</h2>
+                            <div class="mt-2 mb-2">
+                                <span th:each="i : ${#numbers.sequence(1, 5)}">
+                                    <span style="font-size:20px;" th:class="${i <= (item.SCOPEAVG != null ? item.SCOPEAVG : 0) ? 'filled-star' : 'empty-star'}">
+                                        ★
+                                    </span>
+                                </span>
+                            </div>
+                            <p th:text="${#strings.isEmpty(item.USAGEAMOUNT) ? '' : item.USAGEAMOUNT}">요금</p>
+                        </div>
+                    </div>
+                    <div class="row pb-3 border-bottom pt-3" th:unless="${#lists.size(SearchList.getList())} > 0">
+                        <div class="text-center">
+                            <p>조회된 데이터가 없습니다.</p>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item" th:classappend="${SearchList.getPrePage() == 0} ? 'disabled' ">
+                                <a href="#" class="page-link" th:href="@{|/SearchList?category=${category}&Keyword=${Keyword}&pageNum=${SearchList.getPrePage()}|}">&laquo;</a>
+                            </li>
+                            <li class="page-item" th:each="page : ${#numbers.sequence(SearchList.getNavigateFirstPage(), SearchList.getNavigateLastPage())}"
+                                th:classappend="${page == SearchList.getPageNum()} ? 'active' ">
+                                <a href="#" class="page-link" th:href="@{|/SearchList?category=${category}&Keyword=${Keyword}&pageNum=${page}|}" th:text="${page}">1</a>
+                            </li>
+                            <li class="page-item" th:classappend="${SearchList.getNextPage() == 0} ? 'disabled' ">
+                                <a href="#" class="page-link" th:href="@{|/SearchList?category=${category}&Keyword=${Keyword}&pageNum=${SearchList.getNextPage()}|}">&raquo;</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <script>
+            $(document).ready(function () {
+                // 카테고리 들고오기
+                var category = $("#category-data").data("category");
+                var keyword = $("#keyword-data").data("keyword");
+
+               // 전체 버튼 클릭 시 목록 불러오기
+                $("#all-lists-btn").on("click", function () {
+                    $('.circle-button').removeClass('active');
+                    $(this).addClass('active');
+                   $.ajax({
+                       url: `/SearchList?category=`+category + `&Keyword=`,
+                       method: 'GET',
+                       success: function (data) {
+                           $('#content-area').html(data);
+                           var newUrl = `/SearchList?category=`+category + `&Keyword=`;
+                           history.pushState(null, null, newUrl);
+                       },
+                       error: function () {
+                           alert("전체 목록을 가져오는 중 오류 발생");
+                       }
+                   })
+                });
+
+                // 구군 버튼 클릭 시 해당 지역 목록 불러오기
+                $(".gugun-filter").on("click", function () {
+                    var gugun = $(this).data('gugun').trim();
+                    $('.circle-button').removeClass('active');
+                    $(this).addClass('active');
+                    $.ajax({
+                        url: `/SearchList?category=`+category + `&Keyword=${gugun}`,
+                        method: 'GET',
+                        success: function (data) {
+                            $('#content-area').html(data);
+                            var newUrl = `/SearchList?category=`+category + `&Keyword=${gugun}`;
+                            history.pushState(null, null, newUrl);
+                        },
+                        error: function () {
+                            alert("목록을 가져오는 중 오류 발생");
+                        }
+                    })
+                });
+
+            });
+        </script>
+    </main>
+    <div th:replace="~{/layout/Footer :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitc.fullstack503.team1.mapper.init.InitMapper">
+    <insert id="insertSpotList" parameterType="bitc.fullstack503.team1.dto.spot.SItemDTO">
+        INSERT INTO spot
+        (
+            UC_SEQ, MAIN_TITLE, MAIN_IMG_THUMB, USAGE_DAY_WEEK_AND_TIME,
+            HLDY_INFO, TRFC_INFO, USAGE_AMOUNT, MIDDLE_SIZE_RM1, CNTCT_TEL, ADDR1, HOMEPAGE_URL,
+            GUGUN_NM, ITEMCNTNTS, MAIN_IMG_NORMAL,LAT, LNG
+        )
+        VALUES
+        <foreach collection="list" item="spot" separator=",">
+            (
+            #{spot.UC_SEQ}, #{spot.MAIN_TITLE}, #{spot.MAIN_IMG_THUMB},
+            #{spot.USAGE_DAY_WEEK_AND_TIME}, #{spot.HLDY_INFO}, #{spot.TRFC_INFO},
+            #{spot.USAGE_AMOUNT}, #{spot.MIDDLE_SIZE_RM1}, #{spot.CNTCT_TEL},
+            #{spot.ADDR1}, #{spot.HOMEPAGE_URL}, #{spot.GUGUN_NM}, #{spot.ITEMCNTNTS},
+            #{spot.MAIN_IMG_NORMAL}, #{spot.LAT}, #{spot.LNG}
+            )
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        MAIN_TITLE = VALUES(MAIN_TITLE),
+        MAIN_IMG_THUMB = VALUES(MAIN_IMG_THUMB),
+        USAGE_DAY_WEEK_AND_TIME = VALUES(USAGE_DAY_WEEK_AND_TIME),
+        HLDY_INFO = VALUES(HLDY_INFO),
+        TRFC_INFO = VALUES(TRFC_INFO),
+        USAGE_AMOUNT = VALUES(USAGE_AMOUNT),
+        MIDDLE_SIZE_RM1 = VALUES(MIDDLE_SIZE_RM1),
+        CNTCT_TEL = VALUES(CNTCT_TEL),
+        ADDR1 = VALUES(ADDR1),
+        HOMEPAGE_URL = VALUES(HOMEPAGE_URL),
+        GUGUN_NM = VALUES(GUGUN_NM),
+        ITEMCNTNTS = VALUES(ITEMCNTNTS),
+        MAIN_IMG_NORMAL = VALUES(MAIN_IMG_NORMAL),
+        LAT = VALUES(LAT),
+        LNG = VALUES(LNG)
+    </insert>
+    <insert id="insertPlaceList" parameterType="bitc.fullstack503.team1.dto.place.PItemDTO">
+        INSERT INTO place
+        (
+            UC_SEQ, MAIN_TITLE, MAIN_IMG_THUMB, USAGE_DAY_WEEK_AND_TIME,
+            GUGUN_NM, ADDR1, ITEMCNTNTS, RPRSNTV_MENU, CNTCT_TEL, MAIN_IMG_NORMAL, LAT, LNG
+        )
+        VALUES
+        <foreach collection="list" item="place" separator=",">
+            (
+                #{place.UC_SEQ}, #{place.MAIN_TITLE}, #{place.MAIN_IMG_THUMB},
+                #{place.USAGE_DAY_WEEK_AND_TIME}, #{place.GUGUN_NM}, #{place.ADDR1},
+                #{place.ITEMCNTNTS}, #{place.RPRSNTV_MENU}, #{place.CNTCT_TEL},
+                #{place.MAIN_IMG_NORMAL}, #{place.LAT}, #{place.LNG}
+            )
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        MAIN_TITLE = VALUES(MAIN_TITLE),
+        MAIN_IMG_THUMB = VALUES(MAIN_IMG_THUMB),
+        USAGE_DAY_WEEK_AND_TIME = VALUES(USAGE_DAY_WEEK_AND_TIME),
+        GUGUN_NM = VALUES(GUGUN_NM),
+        ADDR1 = VALUES(ADDR1),
+        ITEMCNTNTS = VALUES(ITEMCNTNTS),
+        RPRSNTV_MENU = VALUES(RPRSNTV_MENU),
+        CNTCT_TEL = VALUES(CNTCT_TEL),
+        MAIN_IMG_NORMAL = VALUES(MAIN_IMG_NORMAL),
+        LAT = VALUES(LAT),
+        LNG = VALUES(LNG)
+    </insert>
+</mapper>

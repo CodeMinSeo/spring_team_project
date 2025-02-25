@@ -1,0 +1,229 @@
+* {
+    font-family: "Noto Sans KR", serif;
+}
+@charset "UTF-8";
+/*spotDetail 공통*/
+section {
+    color: #222;
+    padding-bottom: 100px;
+}
+.section-inner {
+    margin: 0 auto;
+    width: 1440px;
+
+}
+
+
+/* spotDetail01 */
+.section1 {
+    text-align: center;
+}
+/*.thumbnail-area {*/
+/*    position: relative;*/
+/*    overflow: hidden;*/
+/*}*/
+.share-btn span{
+    display: inline-block;
+    margin: 3px 10px 0 17px;
+    border: 1px solid #bbb;
+    text-align: center;
+    border-radius: 10px;
+    padding: 6px 10px;
+}
+.thumbnail-main-img {
+    width: 800px;
+    height: 500px;
+    background: #bbbbbb;
+    margin: 0 auto;
+}
+.star {
+    display: inline-block;
+    padding-top: 10px;
+}
+.spot-contents {
+    padding-top: 30px;
+    width: 1000px;
+    line-height: 1.6;
+    font-size: 15px;
+   margin: 0 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 9;
+    -webkit-box-orient: vertical;
+}
+
+
+
+
+    /* spotDetail02 */
+.spot-info {
+    font-size: 20px;
+    padding-bottom: 100px;
+}
+.spot-info dl {
+    padding-bottom: 10px;
+}
+.spot-span {
+    font-weight: 600;
+    width: 200px;
+    display: inline-block;
+}
+.star {
+    font-size: 20px;
+}
+.spot-contents {
+    font-size: 18px;
+    color: #888888;
+}
+
+/* spotDetail03 */
+.section3 {
+    text-align: center;
+}
+
+/* spotDetail04 */
+select {
+    border: none;
+    outline: none;
+}
+
+.review-drop {
+    text-align: right;
+    padding-right: 185px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.review-drop-custom {
+    appearance:none;
+    background-image: url("https://img.icons8.com/ios-filled/50/sort-down.png");
+    background-repeat: no-repeat;
+    background-position: 96% center;
+    background-size: 1rem;
+
+}
+.item {
+    border: 1px solid #D9D9D9;
+    border-radius: 10px;
+    width: 620px;
+    max-height: 260px;
+    margin-bottom: 15px;
+
+}
+
+.section4 button{
+    background: inherit ;
+    border:none;
+    box-shadow:none;
+    border-radius:0;
+    padding:0;
+    overflow:visible;
+    cursor:pointer
+}
+.item ul {
+    list-style-type: none;
+    padding: 15px 0;
+    overflow: hidden;
+}
+.item li:nth-child(1) {
+    font-weight: 600;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+.item li:nth-child(2) {
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    width: 420px;
+}
+
+
+.btn-set button {
+    color: #bbbbbb;
+    padding-left: 20px;
+}
+.reveiw-count-main {
+    padding: 15px 0;
+    position: relative;
+    max-height: 200px;
+}
+.reveiw-count-sub {
+    box-sizing: border-box;
+}
+.btn-set {
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+}
+.reveiw-count-sub {
+    background: #f6f6f6;
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;
+}
+
+
+/* spotDetail05 */
+.section5 {
+    position: relative;
+}
+.review-blur {
+    position: absolute;
+    width: 1500px;
+    height: 530px;
+    background-color: rgb(255, 255, 255,0.8);
+    border-radius: 10px;
+
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+}
+.review-blur-btn {
+    z-index: 99999999999999;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-40%);
+}
+
+.reveiw-write-title {
+    font-weight: 600;
+    width: 100px;
+}
+.reveiw-write-button {
+    text-align: center;
+}
+
+.select-custom {
+    appearance:none;
+    color: #ffc107;
+    background-image: url("https://img.icons8.com/ios-filled/50/sort-down.png");
+    background-repeat: no-repeat;
+    background-position: 96% center;
+    background-size: 1rem;
+    padding-left: 10px;
+}
+textarea {
+    height: 6.25em;
+    border: none;
+    resize: none;
+}
+.kakaoMap{
+    width: 1140px;
+    height: 450px;
+    margin: 0 auto;
+}
+.filled-star {
+    color: gold; /* 채워진 별은 금색 */
+}
+.filled-heart {
+    color: #dc3545;
+}
+
+.empty-star {
+    color: lightgray; /* 비어있는 별은 연한 회색 */
+}

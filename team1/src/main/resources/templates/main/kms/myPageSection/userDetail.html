@@ -1,0 +1,223 @@
+    <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>유저관리</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=IBM+Plex+Sans+KR&family=Noto+Sans+KR:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+            integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    />
+    <!-- bootstrap -->
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+    />
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"
+    ></script>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/myPage.css" />
+    <link rel="stylesheet" href="/css/Header.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script th:src="@{/js/mainPage.js}"></script>
+    <script>
+        $(document).ready(function() {
+
+            $("#btn-list").on("click", function () {
+                // 이렇게해야 뒤로가기 해도 조회수가 목록에서 업데이트됨
+                location.href="/MyPage";
+            });
+
+            $("#btn-update").on("click", function() {
+                $("#method").val("PUT");
+
+                var frm = $("#frm")[0];
+                frm.action = "/MyPage/user/" + $("#user_id").val();
+                frm.submit();
+            });
+
+            $("#btn-delete").on("click", function() {
+                $("#method").val("DELETE");
+
+                var frm = $("#frm")[0];
+                frm.action = "/MyPage/user/" + $("#user_id").val();
+                frm.submit();
+            });
+        });
+    </script>
+
+    <style>
+        .textarea {
+            border: none;
+            resize: none;
+        }
+
+        textarea:focus {
+            outline: none;
+        }
+
+        input:focus {outline:none;}
+
+
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header th:replace="~{/layout/Header :: header}"></header>
+
+<!-- myReview -->
+<section id="myReviewDetail" class="mb-4 container">
+
+    <div class="section-inner">
+        <h2>유저 관리</h2>
+        <hr  class="mb-4">
+
+        <form id="frm" method="post">
+            <input type="hidden" id="method" name="_method">
+
+            <div class="container ">
+                <div class="row w-50 mx-auto">
+                    <!-- Blog entries-->
+                    <div class="col-lg" >
+                        <!-- Featured blog post-->
+                        <div class="card mb-4 d-flex align-content-between flex-wrap" >
+                            <div class="card-body w-100 mx-auto">
+                                <div class="mt-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="user_id"  name="userId" placeholder="글 제목" th:value="${user.userId}" readonly>
+                                        <label for="user_id">ID</label>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control"  name="userPw" placeholder="글 제목" th:value="${user.userPw}">
+                                        <label for="user_id">PW</label>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" name="userName" placeholder="글 제목" th:value="${user.userName}">
+                                        <label for="user_id">Name</label>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" name="userEmail" placeholder="글 제목" th:value="${user.userEmail}">
+                                        <label for="user_id">Email</label>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" name="userPhone" placeholder="폰 번호" th:value="${user.userPhone}">
+                                        <label for="user_id">Phone</label>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" name="deletedYn" placeholder="글 제목" th:value="${user.deletedYn}">
+                                        <label for="user_id">삭제관리</label>
+                                    </div>
+                                </div>
+
+
+
+
+<!--                                <div class="py-5">-->
+<!--                                    <input type="text" class="form-control non-border fs-1" id="user_id"  name="userId" placeholder="글 제목" th:value="${user.userId}" readonly>-->
+<!--                                    <input type="text" class="form-control non-border fs-1"  name="userPw" placeholder="글 제목" th:value="${user.userPw}">-->
+<!--                                    <input type="text" class="form-control non-border fs-1"  name="userName" placeholder="글 제목" th:value="${user.userName}">-->
+<!--                                    <input type="text" class="form-control non-border fs-1"  name="userEmail" placeholder="글 제목" th:value="${user.userEmail}">-->
+<!--                                    <input type="text" class="form-control non-border fs-1"  name="userPhone" placeholder="폰 번호" th:value="${user.userPhone}">-->
+<!--                                    <input type="text" class="form-control non-border fs-1" name="deletedYn" placeholder="글 제목" th:value="${user.deletedYn}">-->
+<!--                                </div>-->
+                            </div>
+                        </div>
+                        <!--            목록, 삭제, 수정, 버튼-->
+                        <div class="row mt-3">
+                            <div class="col-sm">
+                                <button type="button" class="btn btn-secondary" id="btn-list">목록</button>
+                            </div>
+                            <div class="col-sm d-flex justify-content-end">
+                                <button type="button" class="btn btn-danger me-2" id="btn-delete">삭제</button>
+                                <button type="button" class="btn btn-warning" id="btn-update">수정</button>
+                            </div>
+                        </div>
+                    </div>
+<!--                    <div th:replace="~{/layout/side :: side}"></div>-->
+                </div>
+            </div>
+
+
+
+        </form>
+
+
+<!--        <form class="row" id="frm" method="post">-->
+<!--            <input type="hidden" id="method" name="_method">-->
+<!--&lt;!&ndash;            <p th:text="${review}"></p>&ndash;&gt;-->
+<!--            <input type="hidden" id="user_id" name="userId" th:value="${user.userId}">-->
+<!--            <div class="col-sm-9 mb-3" >-->
+<!--                <div class="grid-mb-4 border border-secondary-subtle border-2 rounded">-->
+<!--                    <div class="grid-body p-2"  style="overflow: hidden">-->
+<!--                        <div class="row mt-3">-->
+<!--                            <div class="col-sm-3">-->
+<!--                                <div style="width: 150px; height: 150px;">-->
+<!--&lt;!&ndash;                                    <img src="#" th:src="@{'/images/' + ${review.imageUrl}}" th:style="${#strings.isEmpty(review.imageUrl) ? 'width: 150px; height: 150px; background-color: #bbbbbb;' : 'width: 150px; height: 150px;'}">&ndash;&gt;-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <textarea class="col-sm align-self-center textarea" th:text="${user.userName}" name="contents" id="contents">-->
+<!--                                <p class="" >리뷰 적는 칸 ~ ~ ~ 리뷰 적는 칸 ~ ~ ~ 리뷰 적는 칸 ~ ~ ~-->
+<!--                                    리뷰 적는 칸 ~ ~ ~ 리뷰 적는 칸 ~ ~ ~ 리뷰 적는 칸 ~ ~ ~-->
+<!--                                    리뷰 적는 칸 ~ ~ ~ 리뷰 적는 칸 ~ ~ ~ 리뷰 적는 칸 ~ ~ ~-->
+<!--                                    리뷰 적는 칸 ~ ~ ~ 리뷰 적는 칸 ~ ~ ~-->
+<!--                                </p>-->
+<!--                            </textarea>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="d-flex justify-content-between rounded-bottom bg-secondary bg-opacity-10 p-2">-->
+<!--                      <span class="">-->
+<!--                        <i class="bi bi-star-fill"></i>-->
+<!--                        <i class="bi bi-star-fill"></i>-->
+<!--                        <i class="bi bi-star-fill"></i>-->
+<!--                        <i class="bi bi-star-fill"></i>-->
+<!--                        <i class="bi bi-star-fill"></i>-->
+<!--                      </span>-->
+
+<!--                        <button type="button" class="btn btn-secondary" id="btn-list">목록</button>-->
+<!--                        <div class="col-sm d-flex justify-content-end" >-->
+<!--                            <button type="button" class="btn btn-danger me-2" id="btn-delete">삭제</button>-->
+<!--                            <button type="button" class="btn btn-warning" id="btn-update">수정</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+
+<!--            </div>-->
+<!--        </form>-->
+
+    </div>
+</section>
+</body>
+</html>

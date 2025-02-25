@@ -1,0 +1,77 @@
+/* 기본 흰색 버튼 */
+.circle-button {
+    display: flex;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    color: #007AFF;
+    margin-right: 5px;
+    border: 1px solid #bbbbbb;
+    position: relative;
+}
+
+/* 클릭한 버튼만 파란색 */
+.circle-button.active {
+    background: linear-gradient(135deg, #188FFF, #188FFF);
+    color: white;
+    border: none;
+}
+.filled-star {
+    color: gold; /* 채워진 별은 금색 */
+}
+
+.empty-star {
+    color: lightgray; /* 비어있는 별은 연한 회색 */
+}
+.searchlist h1{
+    margin-right: 16px;
+    display: flex;
+    flex: 1 1 0%;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 1.5rem;
+}
+.searchlist h1 span{
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+}
+
+/*페이지 버튼 스타일  : hyun*/
+.pagination {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.pagination li {
+    margin: 0 1px;
+}
+.pagination a {
+    display: block;
+    padding: 0.3em 0.8em;
+    margin:0 3px;
+    border: 1px solid #999;
+    border-radius: 0.2em;
+    text-decoration: none;
+}
+.pagination a[aria-current="page"] {
+    background-color: #333;
+    color: #fff;
+}
+.page-link:hover {
+    z-index: 2;
+    color: #222222;
+}
+.page-link {
+    color: #bbbbbb;
+}
+.active>.page-link, .page-link.active {
+    z-index: 3;
+    color: #ffffff;
+    background-color: #222222;
+    border-color:#222222;
+}

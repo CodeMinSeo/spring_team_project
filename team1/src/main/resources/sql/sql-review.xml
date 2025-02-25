@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitc.fullstack503.team1.mapper.main.ReviewMapper">
+    <select id="selectDetailReviewCardListA" resultType="bitc.fullstack503.team1.dto.mysql.MyReviewBoardDTO">
+        SELECT
+            a.review_idx, a.user_id, a.UC_SEQ, a.UC_SEQ2, a.contents, a.scope,
+            DATE_FORMAT(a.create_date, '%Y-%m-%d') as create_date, substring(b.image_url,24,100) as image_url
+        FROM
+            review_board a
+        LEFT JOIN
+            review_image b
+        ON
+            a.review_idx = b.review_idx
+        where
+            deleted_yn = 'N'
+        AND
+            UC_SEQ = #{UCSEQ}
+        ORDER BY
+            scope DESC, create_date DESC
+        LIMIT
+            0, 6
+    </select>
+
+    <select id="selectDetailReviewCardListB" resultType="bitc.fullstack503.team1.dto.mysql.MyReviewBoardDTO">
+        SELECT
+            a.review_idx, a.user_id, a.UC_SEQ, a.UC_SEQ2, a.contents, a.scope,
+            DATE_FORMAT(a.create_date, '%Y-%m-%d') as create_date, substring(b.image_url,24,100) as image_url
+        FROM
+            review_board a
+        LEFT JOIN
+            review_image b
+        ON
+            a.review_idx = b.review_idx
+        where
+            deleted_yn = 'N'
+        AND
+            UC_SEQ2 = #{UCSEQ}
+        ORDER BY
+            scope DESC, create_date DESC
+        LIMIT
+            0, 6
+    </select>
+
+    <insert id="insertReviewA" parameterType="bitc.fullstack503.team1.dto.mysql.MyReviewBoardDTO" useGeneratedKeys="true" keyProperty="reviewIdx">
+        INSERT INTO review_board
+        (user_id, UC_SEQ, contents, scope, create_date)
+        VALUES
+        (#{userId}, #{UCSEQ}, #{contents}, #{scope}, now())
+    </insert>
+    <insert id="insertReviewImgListA" parameterType="bitc.fullstack503.team1.dto.mysql.ReviewImageDTO">
+        INSERT INTO review_image
+        (review_idx, image_url, original_file_name, file_size, user_id)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.reviewIdx}, #{item.imageUrl}, #{item.originalFileName}, #{item.fileSize}, #{item.userId})
+        </foreach>
+    </insert>
+
+    <insert id="insertReviewB" parameterType="bitc.fullstack503.team1.dto.mysql.MyReviewBoardDTO" useGeneratedKeys="true" keyProperty="reviewIdx">
+        INSERT INTO review_board
+        (user_id, UC_SEQ2, contents, scope, create_date)
+        VALUES
+        (#{userId}, #{UCSEQ}, #{contents}, #{scope}, now())
+    </insert>
+    <insert id="insertReviewImgListB" parameterType="bitc.fullstack503.team1.dto.mysql.ReviewImageDTO">
+        INSERT INTO review_image
+        (review_idx, image_url, original_file_name, file_size, user_id)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.reviewIdx}, #{item.imageUrl}, #{item.originalFileName}, #{item.fileSize}, #{item.userId})
+        </foreach>
+    </insert>
+
+
+    <select id="avgRatingA" parameterType="int" resultType="int">
+        SELECT ROUND(avg(scope)) AS scope
+        FROM review_board
+        WHERE uc_seq = #{ucseq}
+    </select>
+
+    <update id="updateSpotRating" parameterType="map">
+        UPDATE SPOT SET
+        SCOPE_AVG = #{avgRating}
+        WHERE UC_SEQ = #{ucseq}
+    </update>
+
+    <select id="avgRatingB" parameterType="int" resultType="int">
+        SELECT ROUND(avg(scope)) AS scope
+        FROM review_board
+        WHERE uc_seq2 = #{ucseq}
+    </select>
+
+    <update id="updatePlaceRating" parameterType="map">
+        UPDATE PLACE SET
+        SCOPE_AVG = #{avgRating}
+        WHERE UC_SEQ = #{ucseq}
+    </update>
+</mapper>

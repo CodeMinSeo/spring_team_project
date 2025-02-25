@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bitc.fullstack503.team1.mapper.kms.MyPageMapper">
+
+    <select id="selectMyProfile" parameterType="String" resultType="bitc.fullstack503.team1.dto.mysql.MyUserDTO">
+        SELECT user_id, user_name, user_email, user_phone, grade
+        FROM user
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="selectMySpot" parameterType="String" resultType="bitc.fullstack503.team1.dto.mysql.MySpotDTO">
+        SELECT
+        a.UC_SEQ, a.MAIN_TITLE, a.MAIN_IMG_THUMB, a.ITEMCNTNTS
+        FROM
+        spot a
+        LEFT JOIN
+        bookmark b
+        ON
+        a.UC_SEQ = b.spot_ucseq
+        where
+        b.user_id = #{userId}
+        AND deleted_yn = 'N'
+        ORDER BY
+        create_date ASC
+    </select>
+
+    <select id="selectMyPlace" parameterType="String" resultType="bitc.fullstack503.team1.dto.mysql.MyPlaceDTO">
+        SELECT
+        a.UC_SEQ, a.MAIN_TITLE, a.MAIN_IMG_THUMB, a.ITEMCNTNTS
+        FROM
+        place a
+        LEFT JOIN
+        bookmark b
+        ON
+        a.UC_SEQ = b.place_ucseq
+        where
+        b.user_id = #{userId}
+        AND deleted_yn = 'N'
+        ORDER BY
+        create_date ASC
+    </select>
+
+    <!--  관리자가 모든 유저가 작성한 리뷰 목록 가져오기  -->
+    <select id="selectReviewByManager" resultType="bitc.fullstack503.team1.dto.mysql.MyReviewBoardDTO">
+        SELECT
+        a.review_idx, a.user_id, a.UC_SEQ, a.UC_SEQ2, a.contents, a.scope, DATE_FORMAT(a.update_date, '%Y-%m-%d') as update_date,
+        DATE_FORMAT(a.create_date, '%Y-%m-%d') as create_date, substring(b.image_url,24,100) as image_url
+        FROM
+        review_board a
+        LEFT JOIN
+        review_image b
+        ON
+        a.review_idx = b.review_idx
+        where
+        deleted_yn = 'N'
+        ORDER BY
+        create_date ASC
+    </select>
+
+    <!--  로그인 한 유저가 작성한 리뷰 목록 가져오기  -->
+    <select id="selectReviewByUserName" parameterType="String" resultType="bitc.fullstack503.team1.dto.mysql.MyReviewBoardDTO">
+        SELECT
+        a.review_idx, a.user_id, a.UC_SEQ, a.UC_SEQ2, a.contents, a.scope,
+        DATE_FORMAT(a.create_date, '%Y-%m-%d') as create_date, substring(b.image_url,24,100) as image_url
+        FROM
+        review_board a
+        LEFT JOIN
+        review_image b
+        ON
+        a.review_idx = b.review_idx
+        where
+        a.user_id = #{userId}
+        AND deleted_yn = 'N'
+        ORDER BY
+        create_date ASC
+    </select>
+
+    <!--  로그인 한 유저가 작성한 리뷰 세부페이지  -->
+    <select id="selectReviewDetail" parameterType="map" resultType="bitc.fullstack503.team1.dto.mysql.MyReviewBoardDTO">
+        SELECT
+        a.review_idx, a.user_id, a.UC_SEQ, a.UC_SEQ2, a.contents, a.scope,
+        DATE_FORMAT(a.create_date, '%Y-%m-%d') as create_date, substring(b.image_url,24,100) as image_url
+        FROM
+        review_board a
+        LEFT JOIN
+        review_image b
+        ON
+        a.review_idx = b.review_idx
+        where
+        a.user_id = #{userId}
+        AND a.review_idx = #{reviewIdx}
+        AND deleted_yn = 'N'
+        ORDER BY
+        create_date ASC
+    </select>
+
+    <!--    관리자 리뷰 상세페이지 정보 -->
+    <select id="selectReviewDetailGradeA" parameterType="int" resultType="bitc.fullstack503.team1.dto.mysql.MyReviewBoardDTO">
+        SELECT
+        a.review_idx, a.user_id, a.UC_SEQ, a.UC_SEQ2, a.contents, a.scope,
+        DATE_FORMAT(a.create_date, '%Y-%m-%d') as create_date, substring(b.image_url,24,100) as image_url
+        FROM
+        review_board a
+        LEFT JOIN
+        review_image b
+        ON
+        a.review_idx = b.review_idx
+        WHERE
+        a.review_idx = #{reviewIdx}
+        AND
+        deleted_yn = 'N'
+        ORDER BY
+        create_date ASC
+    </select>
+
+    <!--    리뷰 업데이트 -->
+    <update id="updateReview" parameterType="bitc.fullstack503.team1.dto.mysql.MyReviewBoardDTO">
+        UPDATE review_board
+        SET contents = #{contents}, update_date = now()
+        WHERE review_idx = #{reviewIdx}
+    </update>
+
+    <!--    리뷰 삭제 -->
+    <update id="deleteReview" parameterType="int">
+        UPDATE review_board
+        SET deleted_yn = 'Y'
+        WHERE review_idx = #{reviewIdx}
+    </update>
+
+
+    <!--    유저 grade 찾기 -->
+    <select id="selectUserGrade" resultType="bitc.fullstack503.team1.dto.mysql.MyUserDTO">
+        SELECT * FROM USER
+        WHERE user_id = #{userId}
+    </select>
+
+    <!--  관리자가 모든 유저정보 목록 가져오기  -->
+    <select id="selectUserByManager" resultType="bitc.fullstack503.team1.dto.mysql.MyUserDTO">
+        SELECT user_id, user_pw, user_name, user_email, user_phone, deleted_yn,
+            DATE_FORMAT(create_date, '%Y-%m-%d') as create_date,
+            DATE_FORMAT(update_date, '%Y-%m-%d') as update_date
+        FROM user
+    </select>
+
+    <!--  관리자가 특정 유저 상세정보 가져오기  -->
+    <select id="selectUserDetail" parameterType="String" resultType="bitc.fullstack503.team1.dto.mysql.MyUserDTO">
+        SELECT
+        *
+        FROM user
+        WHERE
+        user_id = #{userId}
+        ORDER BY
+        create_date ASC
+    </select>
+
+    <!--    유저 업데이트 -->
+    <update id="updateUser" parameterType="bitc.fullstack503.team1.dto.mysql.MyUserDTO">
+        UPDATE user
+        SET update_date = now(), user_name = #{userName}, user_email = #{userEmail}, user_phone = #{userPhone}, user_pw = #{userPw}, deleted_yn = #{deletedYn}
+        WHERE user_id = #{userId}
+    </update>
+
+    <!--    유저 삭제 -->
+    <update id="deleteUser" parameterType="String">
+        UPDATE user
+        SET deleted_yn = 'Y'
+        WHERE user_id = #{userId}
+    </update>
+</mapper>

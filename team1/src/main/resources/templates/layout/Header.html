@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/Header.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script th:src="@{/js/mainPage.js}"></script>
+</head>
+<body>
+<header th:fragment="header">
+    <div class="header-inner">
+        <div class="header-container">
+            <div>
+                <a class="header__logo__a header-color-change" href="/" style="font-size: 1.8rem; font-weight: bolder">
+                    <img src="#" alt="#" id="logo">
+                </a>
+            </div>
+
+            <div class="header-container" style="z-index: 1">
+                <div>
+                    <div onclick="ShowMenu()" style="padding-left: 30px" class="header-color-change">
+                        <i class="fa-solid fa-bars" style="font-size: 33px; cursor: pointer"></i>
+                    </div>
+                    <div class="menu_bg">
+                        <div class="menu">
+                            <div
+                                    class="menu-close"
+                                    style="width: 85%; text-align: right"
+                                    onclick="HideMenu()"
+                            >
+                                <i class="fa-solid fa-xmark" style="font-size: 30px"></i>
+                            </div>
+                            <div>
+                                <a class="dropdown-item" href="#" th:href="@{/knh}"
+                                ><span><a
+                                        href="#"
+                                        th:href="@{/khamro}"
+                                        class="align-items-center"
+                                        th:if="${session.userId == null}"
+                                ><span style="font-size: 30px; font-weight: bold;">LOG IN</span></a
+                                >
+                    <a
+                            href="#"
+                            th:href="@{/khamro/logout}"
+                            class="align-items-center"
+                            th:unless="${session.userId == null}"
+                    ><span style="font-size: 30px; font-weight: bold;" >LOG OUT</span></a
+                    ></span></a
+                                >
+                            </div>
+                            <div>
+                                <a class="dropdown-item" href="#" th:href="@{/MyPage}"
+                                ><span class="text">마이페이지</span></a
+                                >
+                            </div>
+                            <div>
+                                <a class="dropdown-item" href="#" th:href="@{/SearchList?category=A&Keyword=}"
+                                ><span>명소 검색하기</span></a
+                                >
+                            </div>
+                            <div>
+                                <a class="dropdown-item" href="#" th:href="@{/SearchList?category=B&Keyword=}"
+                                ><span>맛집 검색하기</span></a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" th:value="${session.userId}" id="userId" />
+    <script>
+        $(document).ready(function () {
+            var currentUrl = window.location.pathname;
+            var logoUrl;
+            if (currentUrl === '/') {
+                logoUrl = '/img/mainlogo.png';
+            }else{
+                logoUrl = '/img/logo.png';
+            }
+
+            $("#logo").attr("src", logoUrl);
+        });
+    </script>
+</header>
+
+</body>
+</html>

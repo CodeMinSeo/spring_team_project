@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>상세보기</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="img/favicon.ico" type="" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+          href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=IBM+Plex+Sans+KR&family=Noto+Sans+KR:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet"
+  />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" th:href="@{/css/knh-css.css}"/>
+  <link rel="stylesheet" href="/css/Header.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+          crossorigin="anonymous"></script>
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+          integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"
+  />
+  <script th:src="@{/js/mainPage.js}"></script>
+  <script th:src="@{/js/Detail.js}"></script>
+  <script>
+    $(document).ready(function () {
+      $("#btn-login").on("click", function() {
+        location.href = "/khamro";
+      });
+    });
+  </script>
+</head>
+<body>
+<div th:replace="~{/layout/Header :: header}"></div>
+<section th:replace="~{/main/knh/spotDetail01 :: section1}"></section>
+<section th:replace="~{/main/knh/spotDetail02 :: section2}"></section>
+<section th:replace="~{/main/knh/spotDetail03 :: section3}"></section>
+<section th:replace="~{/main/knh/spotDetail04 :: section4}"></section>
+<section th:replace="~{/main/knh/spotDetail05 :: section5}"></section>
+</body>
+</html>

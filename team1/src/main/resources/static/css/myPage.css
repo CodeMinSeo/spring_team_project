@@ -1,0 +1,115 @@
+/* profile */
+.profile-box {
+    box-shadow: 0 1px 17px 2px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+/* favorites */
+.favorite-title {
+    text-align: center;
+    width: 150px;
+    margin-left: 10px;
+    padding: 15px 50px 5px 50px;
+    background-color:  #188FFF;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+    box-shadow: 0 1px 17px 2px rgba(0,0,0,0.1);
+    color: #ffffff;
+}
+.fav__card {
+    box-shadow: 0 1px 17px 2px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow:hidden;
+}
+
+.textBox {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-word;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-bottom: 2rem;
+}
+
+.favorite-btn {
+    border-radius: 10px;
+    border: 1px solid #bbbbbb;
+    padding: 8px 30px;
+    color: #000000;
+
+}
+.favorite-btn:hover {
+    box-shadow: 0 1px 10px 2px rgba(0,0,0,0.1);
+    transition: 0.5s;
+}
+/* myReview */
+.review-board {
+    box-shadow: 0 1px 10px 2px rgba(0,0,0,0.1);
+}
+
+/* myReviewDetail */
+#myReviewDetail {
+    margin: 0 auto;
+    /*margin-top: 200px;*/
+}
+
+
+.pagination {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.pagination li {
+    margin: 0 1px;
+}
+.pagination a {
+    display: block;
+    padding: 0.3em 0.8em;
+    margin:0 3px;
+    border: 1px solid #999;
+    border-radius: 0.2em;
+    text-decoration: none;
+}
+.pagination a[aria-current="page"] {
+    background-color: #333;
+    color: #fff;
+}
+.page-link:hover {
+    z-index: 2;
+    color: #222222;
+}
+.page-link {
+    color: #bbbbbb;
+}
+.active>.page-link, .page-link.active {
+    z-index: 3;
+    color: #ffffff;
+    background-color: #222222;
+    border-color:#222222;
+}
+
+
+.max-container {
+    max-width: var(--size-max-width);
+    margin: auto;
+}
+
+.contents-hide{
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-word;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    /*margin-bottom: 2rem;*/
+}
+
+.review__detail__btn:hover {
+    filter: brightness(115%);
+}

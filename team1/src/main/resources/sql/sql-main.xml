@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitc.fullstack503.team1.mapper.main.ListMapper">
+    <select id="SelectMySpotList" resultType="bitc.fullstack503.team1.dto.mysql.MySpotDTO">
+        SELECT * FROM SPOT
+        ORDER BY UC_SEQ ASC
+        LIMIT 1, 10
+    </select>
+    <select id="selectDetailSpot" resultType="bitc.fullstack503.team1.dto.mysql.MySpotDTO">
+        SELECT * FROM SPOT
+        WHERE UC_SEQ = #{UCSEQ}
+    </select>
+    <select id="selectDetailPlace" resultType="bitc.fullstack503.team1.dto.mysql.MyPlaceDTO">
+        SELECT * FROM PLACE
+        WHERE UC_SEQ = #{UCSEQ}
+    </select>
+    <select id="selectPageSearchListA" parameterType="String" resultType="bitc.fullstack503.team1.dto.mysql.MySpotDTO">
+        SELECT MAIN_TITLE, MAIN_IMG_THUMB, GUGUN_NM, USAGE_AMOUNT, UC_SEQ, SCOPE_AVG
+        FROM SPOT
+        WHERE MAIN_TITLE LIKE CONCAT('%', #{Keyword}, '%')
+            OR ADDR1 LIKE CONCAT('%', #{Keyword}, '%')
+            OR GUGUN_NM LIKE CONCAT('%', #{Keyword}, '%')
+        ORDER BY SCOPE_AVG DESC
+    </select>
+    <select id="selectPageSearchListB" parameterType="String" resultType="bitc.fullstack503.team1.dto.mysql.MyPlaceDTO">
+        SELECT MAIN_TITLE, MAIN_IMG_THUMB, GUGUN_NM, UC_SEQ, SCOPE_AVG
+        FROM PLACE
+        WHERE MAIN_TITLE LIKE CONCAT('%', #{Keyword}, '%')
+        OR ADDR1 LIKE CONCAT('%', #{Keyword}, '%')
+        OR GUGUN_NM LIKE CONCAT('%', #{Keyword}, '%')
+        ORDER BY SCOPE_AVG DESC
+    </select>
+
+    <select id="selectGugunList" resultType="bitc.fullstack503.team1.dto.mysql.MySpotDTO">
+        select DISTINCT(gugun_nm) as gugun_nm from spot
+        order by gugun_nm ASC;
+    </select>
+
+    <select id="selectCountResult" resultType="int" parameterType="String">
+        SELECT COUNT(*) FROM SPOT
+        WHERE MAIN_TITLE LIKE CONCAT('%', #{Keyword}, '%')
+        OR ADDR1 LIKE CONCAT('%', #{Keyword}, '%')
+        OR GUGUN_NM LIKE CONCAT('%', #{Keyword}, '%')
+    </select>
+    <select id="selectCountResultB" resultType="int" parameterType="String">
+        SELECT COUNT(*) FROM PLACE
+        WHERE MAIN_TITLE LIKE CONCAT('%', #{Keyword}, '%')
+        OR ADDR1 LIKE CONCAT('%', #{Keyword}, '%')
+        OR GUGUN_NM LIKE CONCAT('%', #{Keyword}, '%')
+    </select>
+</mapper>

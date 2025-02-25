@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitc.fullstack503.team1.mapper.kms.MainPageMapper">
+    <select id="selectSpotRank" resultType="bitc.fullstack503.team1.dto.mysql.MySpotDTO">
+        SELECT s.*, COUNT(r.review_idx) AS review_count
+        FROM spot s
+        JOIN review_board r ON s.UC_SEQ = r.UC_SEQ
+        GROUP BY s.UC_SEQ
+        ORDER BY SCOPE_AVG DESC, review_count DESC
+        LIMIT 1;
+    </select>
+    <select id="selectPlaceList" resultType="bitc.fullstack503.team1.dto.mysql.MyPlaceDTO">
+        SELECT p.*, COUNT(r.review_idx) AS review_count
+        FROM place p
+        LEFT JOIN review_board r ON p.UC_SEQ = r.UC_SEQ2
+        GROUP BY p.UC_SEQ, p.MAIN_TITLE
+        ORDER BY review_count DESC
+        LIMIT 10;
+    </select>
+</mapper>
